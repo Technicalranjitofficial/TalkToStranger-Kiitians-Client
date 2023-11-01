@@ -92,6 +92,12 @@ if(!session) return <h1>Please Logged IN</h1>;
           <button disabled={remoteuser==null} onClick={()=>{
             handleOnSendMessage(messageRef.current?.value);
             messageRef.current!.value="";
+           
+              scrollRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+              });
+            
           }} className="w-1/4 bg-transparent text-white border border-gray-700 rounded-md">Send</button>
         </div>
       </div>
