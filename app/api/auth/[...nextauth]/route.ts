@@ -7,7 +7,7 @@ import CredentialProvider from "next-auth/providers/credentials";
 
 // refresh token
 
-export const refreshToken = async (token: JWT): Promise<JWT> => {
+const refreshToken = async (token: JWT): Promise<JWT> => {
   const res = await fetch(`${process.env.SOCKETURL}/auth/refresh`, {
     method: "POST",
     headers: {
