@@ -32,7 +32,8 @@ const Page = () => {
       if(e.key=="Enter"){
         handleOnSendMessage(messageRef.current?.value);
         messageRef.current!.value="";
-        messageRef.current?.blur();
+        
+        // messageRef.current?.blur();
       }
     }
     document.addEventListener("keydown",handleOnEnterKeyPressed);
@@ -55,7 +56,7 @@ useEffect(() => {
 }, [Message.length]);
 
 
-// if(!session) return <h1>Please Logged IN</h1>;
+if(!session) return <h1>Please Logged IN</h1>;
 
   
 
