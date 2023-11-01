@@ -33,7 +33,7 @@ const Page = () => {
         handleOnSendMessage(messageRef.current?.value);
         messageRef.current!.value="";
         
-        // messageRef.current?.blur();
+        messageRef.current?.blur();
       }
     }
     document.addEventListener("keydown",handleOnEnterKeyPressed);
@@ -91,12 +91,13 @@ if(!session) return <h1>Please Logged IN</h1>;
           <input  ref={messageRef} className="w-full px-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-2" type="text" />
           <button disabled={remoteuser==null} onClick={()=>{
             handleOnSendMessage(messageRef.current?.value);
-            messageRef.current!.value="";
            
               scrollRef.current?.scrollIntoView({
                 behavior: "smooth",
                 block: "end",
               });
+              messageRef.current!.value="";
+              messageRef.current?.blur();
             
           }} className="w-1/4 bg-transparent text-white border border-gray-700 rounded-md">Send</button>
         </div>
