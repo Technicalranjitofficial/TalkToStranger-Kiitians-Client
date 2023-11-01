@@ -32,6 +32,7 @@ const Page = () => {
       if(e.key=="Enter"){
         handleOnSendMessage(messageRef.current?.value);
         messageRef.current!.value="";
+        messageRef.current?.blur();
       }
     }
     document.addEventListener("keydown",handleOnEnterKeyPressed);
@@ -54,7 +55,7 @@ useEffect(() => {
 }, [Message.length]);
 
 
-if(!session) return <h1>Please Logged IN</h1>;
+// if(!session) return <h1>Please Logged IN</h1>;
 
   
 
@@ -64,17 +65,15 @@ if(!session) return <h1>Please Logged IN</h1>;
       <div className="w-full h-full z-0 relative bg-[#0D1116]">
 
         {(remoteuser && Message.length==0)? <div className="flex text-white flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold">Stranger Connected</h1>
+          <h1 className="text-xl font-bold">Stranger Connected</h1>
         
-        </div>: Message.length>0? null:  <div>
-
-        <h1 className="text-white">Waiting for Other User to Join
-        <button onClick={()=>handleOnFindOtherUser()}>Find Other</button>
-        </h1>
+        </div>: Message.length>0? null: <div className="flex text-white flex-col items-center justify-center">
+          <h1 className="text-xl font-bold">Waiting for Stranger</h1>
+          {/* <button onClick={handleOnFindOtherUser} className="px-2 py-1 bg-transparent border border-gray-800 mt-2">Find Other</button> */}
         </div>
           }
 
-       <div className="overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-cyan-600 w-full mt-2 h-[90%]">
+       <div className="overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-cyan-600 w-full mt-2 h-[80%]">
        {
         Message.length>0 &&  Message.map((message,index)=>{
             return(
@@ -87,8 +86,8 @@ if(!session) return <h1>Please Logged IN</h1>;
         <div ref={scrollRef}></div>
        </div>
 
-        <div className="absolute w-full px-2  gap-5 flex justify-evenly flex-row bottom-0">
-          <input disabled={remoteuser==null} ref={messageRef} className="w-full px-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-2" type="text" />
+        <div className="absolute w-full px-2  gap-5 flex justify-evenly flex-row bottom-12">
+          <input  ref={messageRef} className="w-full px-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-2" type="text" />
           <button disabled={remoteuser==null} onClick={()=>{
             handleOnSendMessage(messageRef.current?.value);
             messageRef.current!.value="";
