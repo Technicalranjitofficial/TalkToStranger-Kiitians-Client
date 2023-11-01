@@ -15,9 +15,9 @@ const Page = () => {
 
   const Message = useAppSelector((state)=>state.socketSlice.messages);
 
-  if(!session) return;
+ 
+
   useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_SOCKETURL)
     if (session.data) {
       const res = initSocket(session.data);
       if (res) {
@@ -54,7 +54,7 @@ useEffect(() => {
 }, [Message.length]);
 
 
-
+if(!session) return <h1>Please Logged IN</h1>;
 
   
 
