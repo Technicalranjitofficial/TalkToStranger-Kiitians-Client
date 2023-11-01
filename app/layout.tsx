@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import MenuAppBar from '@/components/MenuAppBar'
+import Providers from './Provider'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +19,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={` bg-[#101418] overflow-y-hidden
+        scrollbar-thin scrollbar-thumb-cyan-600
+      
+      `}>
+<Providers>
+  
+       <MenuAppBar/>
+
+        {children}
+      
+</Providers>
+        </body>
     </html>
   )
 }
