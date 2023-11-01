@@ -5,7 +5,7 @@ import { checkSocketConnection, handleOnChatJoin, handleOnFindOtherUser, handleO
 import { useSession } from "next-auth/react";
 import React, { use, useEffect, useRef, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [isConnected, setIsConnected] = useState(false);
   const session = useSession();
   const [socketCheck, setSocketCheck] = useState<boolean>(false);
@@ -100,5 +100,5 @@ useEffect(() => {
   )
 };
 
-export default page;
+export default Page;
 
