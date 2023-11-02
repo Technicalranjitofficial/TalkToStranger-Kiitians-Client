@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^1.10.1",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
     "@reduxjs/toolkit": "^1.9.7",
     "dotenv": "^16.3.1",
+    "framer-motion": "^10.16.4",
     "next": "14.0.0",
     "next-auth": "^4.24.4",
     "react": "^18",
