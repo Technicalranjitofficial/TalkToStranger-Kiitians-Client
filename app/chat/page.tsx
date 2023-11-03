@@ -1,24 +1,29 @@
 "use client";
 import ChatCard from "@/components/ChatCard";
+import WelcomeMessage from "@/components/WelcomeMessage";
 import { useAppSelector } from "@/redux/hooks";
 import { Message } from "@/redux/slice/SocketSlice";
 import {
   checkSocketConnection,
   handleOnChatJoin,
+  handleOnDisconnect,
   handleOnFindOtherUser,
   handleOnSendMessage,
+  handleOnStop,
   initSocket,
 } from "@/socket/socket";
 import { AnimatePresence } from "framer-motion";
 import { useSession } from "next-auth/react";
 import React, { use, useEffect, useRef, useState } from "react";
+// import useSound from 'use-sound';
 
 const Page = () => {
   const [isConnected, setIsConnected] = useState(false);
   const session = useSession();
   const [socketCheck, setSocketCheck] = useState<boolean>(false);
   const messageRef = useRef<HTMLInputElement>(null);
-
+const isSearching = useAppSelector((state)=>state.socketSlice.isSearching);
+const isDisconnecting = useAppSelector((state)=>state.socketSlice.isDisconnecting);
   const [sockInit, setSockInit] = useState<boolean>(false);
 
   const remoteuser = useAppSelector((state) => state.socketSlice.remoteUsersId);
@@ -30,6 +35,10 @@ const Page = () => {
       if (res) {
         setSocketCheck(res);
         setSockInit(true);
+
+      
+        
+        
       }
     }
   }, [session]);
@@ -40,11 +49,9 @@ const Page = () => {
       if (e.key == "Enter") {
         handleOnSendMessage(messageRef.current?.value);
         messageRef.current!.value = "";
-        if (Message.length > 2) {
+       
           messageRef.current?.focus();
-        } else {
-          messageRef.current?.blur();
-        }
+       
       }
     };
     document.addEventListener("keydown", handleOnEnterKeyPressed);
@@ -73,26 +80,32 @@ const Page = () => {
 
 
 
-<div className="absolute bottom-2 md:bottom-6 px-2 w-full z-50  gap-2 flex justify-evenly flex-row md:h-[8%] lg:h-[7%] h-[10%] ">
+<div className="absolute bottom-2 md:bottom-6 px-2 w-full z-50  gap-4 flex justify-evenly flex-row md:h-[8%] lg:h-[7%] h-[10%] ">
         <input
-          disabled={remoteuser == null}
+          disabled={remoteuser == null||isSearching||isDisconnecting}
           ref={messageRef}
           className="w-full px-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-2"
           type="text"
         />
         <button
-          disabled={remoteuser == null}
+          disabled={!sockInit||isDisconnecting}
           onClick={() => {
-            handleOnSendMessage(messageRef.current?.value);
 
-            messageRef.current!.value = "";
-            if (Message.length > 2) {
-              messageRef.current?.focus();
-            }
+            if(isSearching){
+              handleOnStop();
+            }else if(!remoteuser){
+              handleOnFindOtherUser();
+             }else{
+              handleOnDisconnect();
+             }
+
+         
+
+           
           }}
-          className="w-1/4 bg-transparent text-white border border-gray-700 rounded-md"
+          className={`w-1/4  text-white border border-gray-700 rounded-md ${isSearching?"bg-blue-700":(isDisconnecting || remoteuser)?"bg-red-700":"bg-green-700" }`}
         >
-          Send
+          {remoteuser?"Close": isSearching ? "Finding" :isDisconnecting?"Closing":"New" }
         </button>
       </div>
 
@@ -109,7 +122,10 @@ const Page = () => {
             <AnimatePresence>
               {Message.length > 0 &&
                 Message.map((message, index) => {
-                  return <ChatCard key={index} message={message} />;
+                  return message.isWelcomeMessage?(
+                    <WelcomeMessage message={message} />
+                  ):
+                  <ChatCard key={index} message={message} />;
                 })}
             </AnimatePresence>
           </div>

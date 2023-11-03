@@ -1,11 +1,10 @@
-import { clearMessages, setMessages, setRemoteUsersId } from "@/redux/slice/SocketSlice";
+import { clearMessages, setIsDisconnecting, setIsSearching, setMessages, setRemoteUsersId } from "@/redux/slice/SocketSlice";
 import { store } from "@/redux/store";
 import { Session, SessionOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { UseSessionOptions } from "next-auth/react";
 import { config } from "process";
 import { Socket, io } from "socket.io-client";
-
 
 let socket:Socket;
 
@@ -27,6 +26,8 @@ export const initSocket=(session:Session)=>{
 
     
     socket.on("connect",()=>{
+       
+        
         console.log("Socket Connected");
     })
 
@@ -37,19 +38,39 @@ export const initSocket=(session:Session)=>{
 
     socket.on("joinSuccess",(data)=>{
        
-        socket.emit("findUserToJoin",{message:"Find user to join"});
+        console.log("You are connected");
+        // socket.emit("findUserToJoin",{message:"Find user to join"});
     })
 
     socket.on("noUser",data=>{
       console.log("No User Found");
     })
+
+    socket.on("stopSuccess",()=>{
+        console.log("Stop Success");
+    })
+
+
     socket.on("userFound",(data)=>{
         console.log(data);
+        store.dispatch(clearMessages())
+        store.dispatch(setMessages({
+            createdAt:new Date().toISOString(),
+            isWelcomeMessage:true,
+            message:"Stranger Connected",
+            isConnectionSuccessMessage:true,
+        }))
+        store.dispatch(setIsSearching(false));
         store.dispatch(setRemoteUsersId(data.remoteId))
     })
 
     socket.on("userLeft",handleOnChatLeave)
 
+    socket.on("closed",()=>{
+        console.log("Closed");
+        store.dispatch(setIsDisconnecting(false));
+        
+    })
 
     socket.on("OnMessage",(data)=>{
 
@@ -114,10 +135,15 @@ export const checkSocketConnection=()=>{
 export const handleOnChatLeave=(data:any)=>{
 
     console.log("here");
-    store.dispatch(clearMessages())
+    // store.dispatch(clearMessages())
     console.log("User Left",data);
     store.dispatch(setRemoteUsersId(null))
-    socket.emit("findUserToJoin",{message:"Find user to join"});
+    store.dispatch(setMessages({
+        createdAt:new Date().toISOString(),
+        isWelcomeMessage:true,
+        message:"Stranger Disconnected",
+        isConnectionClosedMessage:true,
+    }))
 }
 
 export const handleOnNextButtonClicked=(session:Session)=>{
@@ -130,5 +156,24 @@ export const handleOnNextButtonClicked=(session:Session)=>{
 }
 
 export const handleOnFindOtherUser=()=>{
+    store.dispatch(setIsSearching(true));
     socket.emit("findUserToJoin",{message:"Find user to join"});
 }
+
+export const handleOnDisconnect=()=>{
+    store.dispatch(setIsDisconnecting(true));
+    store.dispatch(setRemoteUsersId(null))
+    socket.emit("onClose");
+    store.dispatch(setMessages({
+        createdAt:new Date().toISOString(),
+        isWelcomeMessage:true,
+        message:"You Disconnected",
+        isConnectionClosedMessage:true
+    }))
+}
+
+export const handleOnStop=()=>{
+    store.dispatch(setIsSearching(false));
+    socket.emit("onStop");
+}
+

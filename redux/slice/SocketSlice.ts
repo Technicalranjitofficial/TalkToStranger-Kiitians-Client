@@ -2,22 +2,37 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
+
 export interface Message {
     message:string,
-    isSender:boolean,
-    createdAt:string
+    isSender?:boolean,
+    createdAt:string;
+    isWelcomeMessage?:boolean;
+    isConnectionSuccessMessage?:boolean;
+    isConnectionClosedMessage?:boolean;
+    isConnectionError?:boolean;
+    connectionErrorMessage?:string
+
+
 }
 
 export interface RootState {
 
     remoteUsersId:string|null; 
-    messages:Message[] 
+    messages:Message[],
+    isSearching:boolean,
+    isDisconnecting:boolean,
+    
+
+ 
 }
 
 const initialState: RootState = {
 
     remoteUsersId:null,
-    messages:[]
+    messages:[],
+    isSearching:false,
+    isDisconnecting:false
 }
 
 export const SocketSlice = createSlice({
@@ -35,10 +50,19 @@ export const SocketSlice = createSlice({
 
         clearMessages:(state)=>{
             state.messages = [];
+        },
+
+        setIsSearching:(state,{payload}:{payload:boolean})=>{
+            state.isSearching = payload;
+        },
+
+        setIsDisconnecting:(state,{payload}:{payload:boolean})=>{
+            state.isDisconnecting = payload;
         }
+
 
      }
 })
 
-export const {setRemoteUsersId,setMessages,clearMessages} = SocketSlice.actions;
+export const {setRemoteUsersId,setMessages,clearMessages,setIsDisconnecting,setIsSearching} = SocketSlice.actions;
 export default SocketSlice.reducer;
