@@ -44,7 +44,7 @@ function MenuAppBar() {
 
   const session = useSession();
   return (
-    <AppBar position="absolute" sx={{backgroundColor:"#101418"}} className='absolute z-10 bg-[#101418]'>
+    <AppBar position="absolute" sx={{backgroundColor:"#101418"}} className='h-full z-10 bg-[#101418]'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

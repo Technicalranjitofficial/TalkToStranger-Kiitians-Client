@@ -19,15 +19,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` bg-[#101418] overflow-y-hidden
+      <body  className={` absolute inset-0  bg-[#101418] overflow-y-hidden
         scrollbar-thin scrollbar-thumb-cyan-600
       
       `}>
 <Providers>
   
-       <MenuAppBar/>
+   
+     <div className='w-full body-size h-full  flex flex-col '>
 
-        {children}
+     <div className='h-[8%] items-center '>
+  <MenuAppBar/>
+  heki
+     </div>
+
+<div className='h-[92%]'>
+
+{children}
+</div>
+
+     </div>
       
 </Providers>
         </body>

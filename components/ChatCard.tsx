@@ -17,7 +17,7 @@ const ChatCard = ({message}:{message:Message}) => {
   return (
     <motion.div initial={{opacity:0,scale:0.8}} animate={{opacity:1,scale:1}} transition={{opacity:{duration:0.2}}} style={{
       originX:message.isSender?1:0,
-    }} className={` ${message.isSender?"justify-end":""} mt-5 h-auto flex `}>
+    }} className={` ${message.isSender?"justify-end":""} my-2 h-auto flex `}>
        <div className='w-auto min-w-[100px] py-3 px-5 rounded-md bg-transparent border border-gray-800 flex flex-col '>
        <div>
             <h1 style={roboto.style} className='text-gray-400'>{message.isSender?"Me":"Stranger"}</h1>
