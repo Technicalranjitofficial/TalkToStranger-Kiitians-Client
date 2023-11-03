@@ -24,13 +24,17 @@ const Page = () => {
   const [socketCheck, setSocketCheck] = useState<boolean>(false);
   const messageRef = useRef<HTMLInputElement>(null);
 
+  const [sockInit,setSockInit] = useState<boolean>(false);
+
   const remoteuser = useAppSelector((state) => state.socketSlice.remoteUsersId);
   const Message = useAppSelector((state) => state.socketSlice.messages);
   useEffect(() => {
+    if(sockInit) return;
     if (session.data) {
       const res = initSocket(session.data);
       if (res) {
         setSocketCheck(res);
+        setSockInit(true);
       }
     }
   }, [session]);
