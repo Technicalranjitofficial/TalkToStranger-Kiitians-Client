@@ -26,11 +26,11 @@ export default function RootLayout({
 <Providers>
   
    
-     <div className='w-full body-size h-full  flex flex-col '>
+     <div className='w-full  h-full  flex flex-col '>
 
      <div className='h-[8%] items-center '>
   <MenuAppBar/>
-  heki
+ 
      </div>
 
 <div className='h-[92%]'>
