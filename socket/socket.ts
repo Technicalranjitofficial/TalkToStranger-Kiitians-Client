@@ -16,7 +16,7 @@ export const initSocket=(session:Session)=>{
     if(!session) return;
 
     // `${process.env.SOCKETURL}/auth/login`
-    const url = "http://kiitomegleserver.kiitconnect.live:8000"
+    const url = "https://rajmohandas.com.np"
     const localUrl = "http://localhost:8000"
 
     socket = io(`${url}`,{
