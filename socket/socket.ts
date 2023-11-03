@@ -17,7 +17,7 @@ export const initSocket=(session:Session)=>{
 
     // `${process.env.SOCKETURL}/auth/login`
 
-    socket = io(`https://kiitomegle.onrender.com`,{
+    socket = io(`http://kiitomegleserver.kiitconnect.live:8000`,{
         query:{
             accessToken:session.backendToken.accessToken,
         }
