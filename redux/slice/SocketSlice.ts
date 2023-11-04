@@ -11,7 +11,9 @@ export interface Message {
     isConnectionSuccessMessage?:boolean;
     isConnectionClosedMessage?:boolean;
     isConnectionError?:boolean;
-    connectionErrorMessage?:string
+    connectionErrorMessage?:string,
+    isServerConnected?:boolean,
+    isSearching?:boolean,
 
 
 }
@@ -22,8 +24,7 @@ export interface RootState {
     messages:Message[],
     isSearching:boolean,
     isDisconnecting:boolean,
-    
-
+    isUserTyping:boolean,
  
 }
 
@@ -32,7 +33,8 @@ const initialState: RootState = {
     remoteUsersId:null,
     messages:[],
     isSearching:false,
-    isDisconnecting:false
+    isDisconnecting:false,
+    isUserTyping:false,
 }
 
 export const SocketSlice = createSlice({
@@ -58,11 +60,15 @@ export const SocketSlice = createSlice({
 
         setIsDisconnecting:(state,{payload}:{payload:boolean})=>{
             state.isDisconnecting = payload;
+        },
+
+        setisUserTyping:(state,{payload}:{payload:boolean})=>{
+            state.isUserTyping = payload;
         }
 
 
      }
 })
 
-export const {setRemoteUsersId,setMessages,clearMessages,setIsDisconnecting,setIsSearching} = SocketSlice.actions;
+export const {setRemoteUsersId,setMessages,clearMessages,setIsDisconnecting,setIsSearching,setisUserTyping} = SocketSlice.actions;
 export default SocketSlice.reducer;

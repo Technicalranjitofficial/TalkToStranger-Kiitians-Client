@@ -1,4 +1,4 @@
-import { clearMessages, setIsDisconnecting, setIsSearching, setMessages, setRemoteUsersId } from "@/redux/slice/SocketSlice";
+import { clearMessages, setIsDisconnecting, setIsSearching, setMessages, setRemoteUsersId, setisUserTyping } from "@/redux/slice/SocketSlice";
 import { store } from "@/redux/store";
 import { Session, SessionOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
@@ -9,7 +9,7 @@ import { Socket, io } from "socket.io-client";
 let socket:Socket;
 
 
-export const initSocket=(session:Session)=>{
+export const initSocket=(session:Session,messageContainerRef:React.RefObject<HTMLDivElement>)=>{
 
     console.log("run",session);
     if(!session) return;
@@ -86,6 +86,13 @@ export const initSocket=(session:Session)=>{
     })
 
 
+    socket.on("onTyping",(data)=>{
+        console.log(data);
+        store.dispatch(setisUserTyping(data.isTyping));
+        messageContainerRef.current?.scrollHeight;
+    })
+
+
 
 
     if(socket){
@@ -132,6 +139,9 @@ export const checkSocketConnection=()=>{
 
 
 
+
+
+
 export const handleOnChatLeave=(data:any)=>{
 
     console.log("here");
@@ -146,16 +156,23 @@ export const handleOnChatLeave=(data:any)=>{
     }))
 }
 
-export const handleOnNextButtonClicked=(session:Session)=>{
-    // socket.emit("nextButtonClicked",{message:"Find user to join"});
-    socket.disconnect();
-    store.dispatch(clearMessages());
-    store.dispatch(setRemoteUsersId(null))
+// export const handleOnNextButtonClicked=(session:Session)=>{
+//     // socket.emit("nextButtonClicked",{message:"Find user to join"});
+//     socket.disconnect();
+//     store.dispatch(clearMessages());
+//     store.dispatch(setRemoteUsersId(null))
 
-    initSocket(session)
-}
+//     initSocket(session)
+// }
 
 export const handleOnFindOtherUser=()=>{
+    store.dispatch(setMessages({
+        createdAt:new Date().toISOString(),
+        isWelcomeMessage:true,
+        message:"Finding your match please wait...",
+        isSearching:true,
+    
+    }));
     store.dispatch(setIsSearching(true));
     socket.emit("findUserToJoin",{message:"Find user to join"});
 }
@@ -177,3 +194,12 @@ export const handleOnStop=()=>{
     socket.emit("onStop");
 }
 
+
+export const handleOnUserTyping=(isTyping:boolean)=>
+{
+    console.log("ustypin",isTyping,socket);
+    socket.emit("userIstyping",{
+        isTyping:isTyping,
+        
+    });
+}

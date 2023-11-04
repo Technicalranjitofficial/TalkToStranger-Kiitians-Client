@@ -16,7 +16,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+
+const pages = [""];
 const settings = [{
   name:'logout',
   url:"/api/auth/signout"
@@ -45,11 +46,11 @@ function MenuAppBar() {
   const session = useSession();
   return (
     <AppBar position="static" sx={{backgroundColor:"#101418"}} className='h-full z-10 bg-[#101418]'>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
@@ -63,10 +64,10 @@ function MenuAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Stranger
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -101,10 +102,10 @@ function MenuAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          </Box> */}
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
-            variant="h5"
+            variant="h4"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
@@ -118,8 +119,10 @@ function MenuAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+
+            
           >
-            LOGO
+            Stranger
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -133,9 +136,15 @@ function MenuAppBar() {
             ))}
           </Box>
 
-          {!session.data?.user? <Link href="api/auth/signin">Login</Link> :
+          {!session.data?.user? 
+          
+          <div className='flex gap-5'>
+            <Link className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-1 rounded-sm'  href="/signup">Register</Link>
+            <Link className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  px-3 py-1 rounded-sm' href="api/auth/signin">Login</Link>
+          </div>
+          :
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0,  }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/favicon.ico" />

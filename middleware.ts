@@ -1,3 +1,64 @@
-export { default } from "next-auth/middleware"
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
-export const config = { matcher: ["/sss"] }
+export default withAuth(
+    async function middleware(req) {
+
+        const pathname = req.nextUrl.pathname;
+        const auth = req.nextauth.token;
+
+        console.log(pathname);
+
+        if(pathname.startsWith("/chat") && !auth){
+            return NextResponse.redirect(new URL("/api/auth/signin",req.url));
+        }
+
+
+        // if(pathname.startsWith("/api/auth/signin") && auth){
+        //     console.log("here")
+        //     return NextResponse.redirect(new URL("/",req.url));
+        // }
+
+
+        if(pathname.startsWith("/signup") && auth){
+            console.log("here")
+            return NextResponse.redirect(new URL("/",req.url));
+        }
+
+        console.log("Here")
+
+        return NextResponse.next();
+
+        
+    },
+
+    {
+
+    
+
+  callbacks: {
+    authorized: async ({ req, token }) => {
+        console.log(req.nextUrl.pathname);
+
+        if(req.nextUrl.pathname.startsWith("/signup") && !token){
+            return true;
+         }
+       
+    return !!token;
+
+    },
+
+  },
+});
+
+export const config = {
+    matcher:["/chat",
+    "/signup",
+//all api route    
+   
+
+]
+}
+
+
+
