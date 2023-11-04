@@ -26,7 +26,7 @@ const dispatch = useAppDispatch();
         }, 3000);
     }
   }
-    , [message.open])
+    , [message.open,dispatch])
   
   return (
     <div>

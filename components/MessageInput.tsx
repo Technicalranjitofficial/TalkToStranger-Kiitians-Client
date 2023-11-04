@@ -26,8 +26,9 @@ const MessageInput = ({sockInit,
 
 
     const [isTyping, setIsTyping] = useState(false);
-    let typingTimeout: any = null;
+    // const typingTimeout= useRef<TimerHandler>(null);
   
+    let typingTimeout:any=null;
     useEffect(() => {
       if (isTyping) {
         clearTimeout(typingTimeout);

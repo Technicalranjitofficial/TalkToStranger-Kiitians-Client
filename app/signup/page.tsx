@@ -19,7 +19,7 @@ const statusCodeMessage ={
     "409":"Already Exist Email!"
 }
 
-const page = () => {
+const Sigbup = () => {
 
 
 
@@ -187,4 +187,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Sigbup;
