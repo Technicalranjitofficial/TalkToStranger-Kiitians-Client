@@ -23,7 +23,7 @@ const dispatch = useAppDispatch();
     if(message.open){
         setTimeout(() => {
             dispatch(setMessage({msg:"",type:"success",open:false}))
-        }, 3000);
+        }, 4000);
     }
   }
     , [message.open,dispatch])

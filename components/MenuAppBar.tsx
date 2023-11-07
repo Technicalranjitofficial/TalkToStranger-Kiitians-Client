@@ -19,7 +19,7 @@ import Link from 'next/link';
 
 const pages = [""];
 const settings = [{
-  name:'logout',
+  name:'Logout',
   url:"/api/auth/signout"
 }];
 
@@ -49,11 +49,12 @@ function MenuAppBar() {
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          
           <Typography
             variant="h4"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+         href='/'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -64,8 +65,10 @@ function MenuAppBar() {
               textDecoration: 'none',
             }}
           >
-            Stranger
+           Stranger
+          
           </Typography>
+      
 
           {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -104,26 +107,29 @@ function MenuAppBar() {
             </Menu>
           </Box> */}
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+        
           <Typography
-            variant="h4"
+            variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href='/'
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
 
             
-          >
+            >
             Stranger
+
           </Typography>
+            
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -140,14 +146,14 @@ function MenuAppBar() {
           
           <div className='flex gap-5'>
             <Link className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-1 rounded-sm'  href="/signup">Register</Link>
-            <Link className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  px-3 py-1 rounded-sm' href="api/auth/signin">Login</Link>
+            <Link className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  px-3 py-1 rounded-sm' href="/api/auth/signin">Login</Link>
           </div>
           :
 
           <Box sx={{ flexGrow: 0,  }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/favicon.ico" />
+                <Avatar alt="profile picture" src="/profile.png" />
               </IconButton>
             </Tooltip>
             <Menu
