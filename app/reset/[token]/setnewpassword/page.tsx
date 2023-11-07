@@ -79,7 +79,7 @@ const SetNewPassword = () => {
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white"
             >
               Your password
             </label>
@@ -104,7 +104,7 @@ const SetNewPassword = () => {
           <div className="mb-6">
             <label
               htmlFor="confirm-password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white"
             >
               Confirm Password
             </label>
