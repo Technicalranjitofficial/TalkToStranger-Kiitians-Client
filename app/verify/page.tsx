@@ -21,7 +21,7 @@ const page = (props:PageProps) => {
   if(props.searchParams.otpMode==="false")
   {
     if(!props.searchParams.otp) throw new Error("Unauthorized Access Invalid Otp");
-    return <div className="min-h-screen flex items-center justify-center">
+    return <div className="h-full flex items-center justify-center">
     <div className="bg-transparent border border-gray-600 rounded-lg shadow-md p-8 max-w-sm w-full">
       <h2 className="text-2xl font-semibold text-gray-300  mb-4">
         Verifying Your Account
@@ -29,8 +29,6 @@ const page = (props:PageProps) => {
      <Suspense fallback={<EmailFallBack msg='Please Wait while we are verifying your account' />}>
      <VerifyingEmail otp={props.searchParams.otp} token={props.searchParams.token} />
      </Suspense>
-     
-      
     </div>
   </div>
   }

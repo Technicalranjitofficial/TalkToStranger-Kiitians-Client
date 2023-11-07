@@ -37,7 +37,7 @@ const VerifyEmail = ({token}:{otp:string,token:string}) => {
 
     }
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="h-full flex items-center justify-center">
     <div className="bg-transparent border border-gray-600 rounded-lg shadow-md p-8 max-w-sm w-full">
       <h2 className="text-2xl font-semibold text-gray-300  mb-4">
         Verify OTP
