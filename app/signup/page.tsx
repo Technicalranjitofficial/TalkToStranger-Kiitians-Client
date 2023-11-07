@@ -20,7 +20,7 @@ const statusCodeMessage ={
     "409":"Already Exist Email!"
 }
 
-const Sigbup = () => {
+const SignUp = () => {
 
 const router = useRouter();
 
@@ -191,4 +191,4 @@ const router = useRouter();
   );
 };
 
-export default Sigbup;
+export default SignUp;

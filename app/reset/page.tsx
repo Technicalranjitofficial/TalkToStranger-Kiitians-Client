@@ -32,7 +32,6 @@ const Reset = () => {
     if(!emailRef.current?.value) return dispatch(setMessage({msg:"Please Enter Email",type:"error",open:true}));
     dispatch(setIsLoading(true));
     const res = await SendResetPasswords(emailRef.current?.value);
-
     dispatch(setMessage({msg:res.message,type:res.statusCode==200?"success":"error",open:true}))
     dispatch(setErrorMessage(res.message));
     dispatch(setIsLoading(false));

@@ -18,7 +18,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { ResetPassRequestModal } from "@/components/ResetPassRequest.modal";
 
-const Sigbup = () => {
+const SignIn = () => {
   const router = useRouter();
 
   const {
@@ -33,6 +33,8 @@ const Sigbup = () => {
 
   const searchParams = useSearchParams();
 
+
+
   const dispatch = useAppDispatch();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
@@ -43,6 +45,9 @@ const Sigbup = () => {
     console.log(data);
 
     dispatch(setIsLoading(true));
+
+
+    
     
 
     const safeParseData = signupSchema.safeParse(data);
@@ -61,12 +66,14 @@ const Sigbup = () => {
         });
       });
     }
-    const res = await signIn("credentials", {
+     signIn("credentials", {
         redirect:true,
       email: data.email,
       password: data.password,
       callbackUrl:callbackUrl,
-    });
+    })
+
+    
   };
 
   return (
@@ -114,6 +121,8 @@ const Sigbup = () => {
             {errors.password && <span>{errors.password.message}</span>}
           </div>
 
+          {searchParams.get("error") && <span>Invalid Credientials!</span> }
+
           <ResetPassRequestModal/>
 
           <button
@@ -152,4 +161,4 @@ const Sigbup = () => {
   );
 };
 
-export default Sigbup;
+export default SignIn;

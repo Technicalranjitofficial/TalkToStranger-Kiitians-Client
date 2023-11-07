@@ -146,7 +146,7 @@ function MenuAppBar() {
           
           <div className='flex gap-5'>
             <Link className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-1 rounded-sm'  href="/signup">Register</Link>
-            <Link className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  px-3 py-1 rounded-sm' href="/api/auth/signin">Login</Link>
+            <Link className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  px-3 py-1 rounded-sm' href="/signin">Login</Link>
           </div>
           :
 
