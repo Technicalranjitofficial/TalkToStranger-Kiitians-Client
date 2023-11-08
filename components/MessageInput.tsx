@@ -102,7 +102,7 @@ const MessageInput = ({sockInit,
         ? "Closing"
         : "New"}
     </button>
-    <div className="w-full pr-1 flex pl-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-1 ">
+    <div className="w-full pr-1 flex pl-2 bg-transparent border border-gray-800 text-white outline-none rounded-md py-[2px] ">
       <input
         disabled={remoteuser == null || isSearching || isDisconnecting}
         ref={messageRef}
