@@ -4,7 +4,7 @@ import React from "react";
 
 const WelcomeMessage = ({ message }: { message: Message }) => {
   return (
-    <div className="w-full flex-col gap-3 flex items-center my-2  justify-center h-auto min-h-[100px] bg-transparent border border-gray-700 rounded-md text-white">
+    <div className="w-full flex-col gap-3 flex items-center my-2 text-center  justify-center h-auto min-h-[100px] bg-transparent border border-gray-700 rounded-md text-white">
       <div
         className={`${
           message.isConnectionSuccessMessage

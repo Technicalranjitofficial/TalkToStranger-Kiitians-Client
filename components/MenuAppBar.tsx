@@ -60,12 +60,12 @@ function MenuAppBar() {
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              letterSpacing: '.2rem',
+              color: 'cyan',
               textDecoration: 'none',
             }}
           >
-           Stranger
+           Matcher
           
           </Typography>
       
@@ -119,14 +119,15 @@ function MenuAppBar() {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'inherit',
+              letterSpacing: '.1rem',
+              color: 'cyan',
               textDecoration: 'none',
+              
             }}
 
             
             >
-            Stranger
+            Matcher
 
           </Typography>
             

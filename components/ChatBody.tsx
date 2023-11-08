@@ -41,7 +41,7 @@ const ChatBody = ({}) => {
     ) : Message.length > 0 ? (
       <div
         ref={messagesContainerRef}
-        className="overflow-y-auto px-2   scrollbar-thin scrollbar-thumb-cyan-600 w-full h-full "
+        className="overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-gray-700 w-full h-full "
       >
         <AnimatePresence>
           {Message.length > 0 &&

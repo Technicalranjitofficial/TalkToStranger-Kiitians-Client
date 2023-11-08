@@ -48,7 +48,7 @@ export function ResetPassRequestModal() {
         {/* <Button variant="outline">Share</Button> */}
         <p className="text-blue-400 cursor-pointer">Forget password?</p>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md bg-[#101418] text-white p-5 ">
+      <DialogContent className="sm:max-w-md bg-[#101418] text-white ">
         <DialogHeader>
           <DialogTitle>Reset Password</DialogTitle>
           <DialogDescription>
