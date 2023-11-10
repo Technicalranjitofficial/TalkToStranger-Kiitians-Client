@@ -11,13 +11,10 @@ let socket:Socket;
 
 export const initSocket=(session:Session,messageContainerRef:React.RefObject<HTMLDivElement>)=>{
 
-    console.log("run",session);
+  
     if(!session) return;
-
-    // `${process.env.SOCKETURL}/auth/login`
     const url = "https://rajmohandas.com.np"
     const localUrl = "http://localhost:8000"
-
     socket = io(`${url}`,{
         query:{
             accessToken:session.backendToken.accessToken,
@@ -39,7 +36,6 @@ export const initSocket=(session:Session,messageContainerRef:React.RefObject<HTM
     socket.on("joinSuccess",(data)=>{
        
         console.log("You are connected");
-        // socket.emit("findUserToJoin",{message:"Find user to join"});
     })
 
     socket.on("noUser",data=>{
@@ -197,7 +193,7 @@ export const handleOnStop=()=>{
 
 export const handleOnUserTyping=(isTyping:boolean)=>
 {
-    console.log("ustypin",isTyping,socket);
+    // console.log("ustypin",isTyping,socket);
     socket.emit("userIstyping",{
         isTyping:isTyping,
         
