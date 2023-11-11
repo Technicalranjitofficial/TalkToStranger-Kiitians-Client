@@ -1,9 +1,9 @@
 "use client";
-import { handleOnVerifyEmail } from '@/ServerActions/User';
+import { handleOnVerifyEmail, signup } from '@/ServerActions/User';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setErrorMessage, setIsLoading, setMessage } from '@/redux/slice/AuthSlice';
 import { useRouter } from 'next/navigation';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const VerifyEmail = ({token}:{otp:string,token:string}) => {
 
@@ -36,6 +36,8 @@ const VerifyEmail = ({token}:{otp:string,token:string}) => {
       
 
     }
+
+  
   return (
     <div className="h-full flex items-center justify-center">
     <div className="bg-transparent border border-gray-600 rounded-lg shadow-md p-8 max-w-sm w-full">
@@ -45,7 +47,7 @@ const VerifyEmail = ({token}:{otp:string,token:string}) => {
       <form>
         <div className="my-4">
           <label htmlFor="otp" className="block  text-gray-300">
-           <span className='text-green-500'> Check your email</span>, We have sent you a verification code.Code will be expired in 5 min.
+           <span className='text-green-500'>Please Check your email and <span className='text-red-500'>Spam folder also</span></span>, We have sent you a verification code.Code will be expired in 30 min.
           </label>
           <input
             type="number"
@@ -59,6 +61,15 @@ const VerifyEmail = ({token}:{otp:string,token:string}) => {
         {errorMessage && errorMessage.length>0 && <span className='my-2 text-red-500'>
           {errorMessage}
           </span>}
+
+
+        {/* <p  onClick={()=>{
+          if(timer==0 && email.length>0){
+            setTimer(30);
+            
+
+          }
+        }} className='text-white underline my-4'>{timer==0?"Resend":timer}</p> */}
 
         <button
             onClick={handleOnVerify}

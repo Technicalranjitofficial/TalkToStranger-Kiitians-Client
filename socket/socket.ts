@@ -15,7 +15,7 @@ export const initSocket=(session:Session,messageContainerRef:React.RefObject<HTM
     if(!session) return;
     const url = "https://rajmohandas.com.np"
     const localUrl = "http://localhost:8000"
-    socket = io(`${url}`,{
+    socket = io(`${localUrl}`,{
         query:{
             accessToken:session.backendToken.accessToken,
         }

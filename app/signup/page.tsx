@@ -46,6 +46,8 @@ const router = useRouter();
     const submit: SubmitHandler<TSignUpSchema> = async (data) => {
         console.log(data);
 
+        if(data.email.includes("kiit.ac.in")) return alert("Do not use Kiit mail id");
+
         dispatch(setIsLoading(true));
         const res = await signup(data);
         console.log(res);
@@ -75,7 +77,7 @@ const router = useRouter();
     <main className="flex overflow-y-hidden gap-5 px-3 py-5 justify-center rounded-md   h-full z-50  flex-col mx-auto max-w-2xl">
       <div className=" border px-5 py-10 rounded-md  gap-5 flex flex-col border-slate-800">
         <div className=" ">
-          <h1 className="text-white text-xl">Register and Start Chatting </h1>
+          <h1 className="text-white text-xl">Register <span className="text-xs text-red-500">( Do not use Kiit mail id )</span> </h1>
         </div>
         <form  onSubmit={handleSubmit(submit)} className="text-red-500">
           <div className="mb-6">
@@ -111,7 +113,7 @@ const router = useRouter();
               type="email"
               id="email"
               className=" text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-              placeholder="name@gmail.com"
+              placeholder="do not use kiit mail id"
               required
             />
 

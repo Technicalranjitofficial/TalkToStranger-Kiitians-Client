@@ -10,7 +10,8 @@ export interface PageProps{
   searchParams:{
         token:string,
         otpMode:string,
-        otp?:string
+        otp?:string,
+       
     }
 }
 const page = (props:PageProps) => {
@@ -32,6 +33,7 @@ const page = (props:PageProps) => {
     </div>
   </div>
   }
+
 
   return (
     <VerifyEmail otp={`${props.searchParams.otp}`} token={props.searchParams.token}/>
